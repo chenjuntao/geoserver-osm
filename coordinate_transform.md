@@ -1,24 +1,29 @@
-GDAL库下载地址-----------------------------------------------------------------
+GDAL库下载地址
+-----------------------------------------------------------------
 网站：http://www.gisinternals.com/query.html?content=filelist&file=release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip
 下载第一个：release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip
 描述为：Compiled binaries in a single .zip package
 
-坐标系查询-----------------------------------------------------------------
+坐标系查询
+-----------------------------------------------------------------
 地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm
 投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
 
-我国常用坐标系代码---------------------------------------------------------
+我国常用坐标系代码
+--------------------------------------------------------- 
 4214 GCS_Beijing_1954 
 4326 GCS_WGS_1984 
 4490 GCS_China_Geodetic_Coordinate_System_2000 
 4610 GCS_Xian_1980
 
-坐标在线转换---------------------------------------------------------------
+坐标在线转换
+---------------------------------------------------------------
 在线坐标转换测试地址：
 https://mygeodata.cloud/cs2cs/
 
 
-GDAL安装与JAVA开发配置步骤-------------------------------------------------
+GDAL安装与JAVA开发配置步骤
+-------------------------------------------------
 1、解压缩
 2、设置环境变量bin到PATH
 3、设置环境变量GDAL_DATA为\bin\gdal-data
@@ -26,7 +31,9 @@ GDAL安装与JAVA开发配置步骤---------------------------------------------
 5、设置gdal.jar到项目build path中
 
 
-代码-----------------------------------------------------------------------
+代码
+-----------------------------------------------------------------------
+```
 // creating EPSG:4326
 SpatialReference sourceSRS = new SpatialReference();
 sourceSRS.ImportFromEPSG(4326);
@@ -46,3 +53,4 @@ point.TransformTo(targetSRS);
 CoordinateTransformation coodTrans = CoordinateTransformation.CreateCoordinateTransformation(sourceSRS, targetSRS);
 double[] result1 = coodTrans.TransformPoint(120, 30, 0);
 System.out.println(result1);
+```

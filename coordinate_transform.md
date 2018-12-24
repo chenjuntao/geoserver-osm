@@ -6,21 +6,22 @@ GDAL库下载地址
 
 坐标系查询
 -----------------------------------------------------------------
-地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm
-投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
+1.地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm
+2.投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
 
 我国常用坐标系代码
 --------------------------------------------------------- 
-4214 GCS_Beijing_1954 
-4326 GCS_WGS_1984 
-4490 GCS_China_Geodetic_Coordinate_System_2000 
-4610 GCS_Xian_1980
+1.4214 GCS_Beijing_1954 
+2.4326 GCS_WGS_1984 
+3.4490 GCS_China_Geodetic_Coordinate_System_2000 
+4.4610 GCS_Xian_1980
+5.3395 WGS 84 / World Mercator
 
 坐标在线转换
 ---------------------------------------------------------------
 在线坐标转换测试地址：
-https://mygeodata.cloud/cs2cs/ 
-http://epsg.io/
+1.https://mygeodata.cloud/cs2cs/ 
+2.http://epsg.io/
 
 
 GDAL安装与JAVA开发配置步骤

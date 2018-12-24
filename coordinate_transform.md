@@ -1,37 +1,36 @@
 GDAL库下载地址
 -----------------------------------------------------------------
 网站：http://www.gisinternals.com/query.html?content=filelist&file=release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip
-下载第一个：release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip
-描述为：Compiled binaries in a single .zip package
+下载第一个：release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip  
+描述为：Compiled binaries in a single .zip package  
 
 坐标系查询
 -----------------------------------------------------------------
-1.地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm
+1.地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm  
 2.投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
 
 我国常用坐标系代码
 --------------------------------------------------------- 
-1.4214 GCS_Beijing_1954 
-2.4326 GCS_WGS_1984 
-3.4490 GCS_China_Geodetic_Coordinate_System_2000 
-4.4610 GCS_Xian_1980
-5.3395 WGS 84 / World Mercator
+4214 GCS_Beijing_1954 
+4326 GCS_WGS_1984 
+4490 GCS_China_Geodetic_Coordinate_System_2000 
+4610 GCS_Xian_1980
+3395 WGS84/World Mercator
 
 坐标在线转换
 ---------------------------------------------------------------
 在线坐标转换测试地址：
-1.https://mygeodata.cloud/cs2cs/ 
-2.http://epsg.io/
+https://mygeodata.cloud/cs2cs/  
+http://epsg.io/
 
 
 GDAL安装与JAVA开发配置步骤
 -------------------------------------------------
-1、解压缩
-2、设置环境变量bin到PATH
-3、设置环境变量GDAL_DATA为\bin\gdal-data
-4、bin\gdal\java中的库拷贝到项目根目录下
-5、设置gdal.jar到项目build path中
-
+1、解压缩  
+2、设置环境变量bin到PATH  
+3、设置环境变量GDAL_DATA为\bin\gdal-data  
+4、bin\gdal\java中的库拷贝到项目根目录下  
+5、设置gdal.jar到项目build path中  
 
 代码
 -----------------------------------------------------------------------

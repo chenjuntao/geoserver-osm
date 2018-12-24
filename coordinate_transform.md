@@ -1,13 +1,13 @@
 GDAL库下载地址
 -----------------------------------------------------------------
-网站：http://www.gisinternals.com/query.html?content=filelist&file=release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip
+网站：http://www.gisinternals.com/query.html?content=filelist&file=release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip  
 下载第一个：release-1900-x64-gdal-2-3-2-mapserver-7-2-1.zip  
 描述为：Compiled binaries in a single .zip package  
 
 坐标系查询
 -----------------------------------------------------------------
-1.地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm  
-2.投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
+地理坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/gcs.htm  
+投影坐标系WKID：https://developers.arcgis.com/javascript/3/jshelp/pcs.htm
 
 我国常用坐标系代码
 --------------------------------------------------------- 

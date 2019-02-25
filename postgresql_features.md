@@ -65,11 +65,11 @@
 
 **缓存**：物化视图
 
-![img](https://pic2.zhimg.com/v2-c35e6b6ce2559302f17665ee1bd6bde5_b.jpg)PostgreSQL知名扩展
+![img](img/postgresql1.jpg)PostgreSQL知名扩展
 
 ​     在探探的实践中，整个系统就是围绕PostgreSQL设计的。几百万日活，几百万全局DB-TPS，几百TB数据的量级下，数据组件只用了PostgreSQL。直到接近千万日活，才开始进行架构调整引入独立的数仓，消息队列和缓存。这只是验证过的规模量级，进一步压榨PG是完全可行的。
 
-![img](https://pic4.zhimg.com/v2-b7b31d442e75c4f68f481160e891580f_b.jpg)围绕PostgreSQL的架构演进
+![img](img/postgresql2.jpg)围绕PostgreSQL的架构演进
 
 ​     因此在一个很可观的规模内，PostgreSQL都可以扮演多面手的角色，一个组件当多种组件使。**虽然在某些领域它可能比不上专用组件**，至少都做的都还不赖。**而单一数据组件选型可以极大地削减项目额外复杂度，这意味着能节省很多成本。它让十个人才能搞定的事，变成一个人就能搞定的事。**
 

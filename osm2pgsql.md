@@ -38,6 +38,29 @@ OSM地图下载地址：<http://download.geofabrik.de/>
 
 ## 3. 将OSM数据导入到pgsql
 
+```
+#创建存放osm原始数据的目录
+mkdir /data/osmdata
+cd /data/osmdata
+
+#下载osm数据...
+#下载样式文件
+wget -O openstreetmap-carto-master.zip https://codeload.github.com/gravitystorm/openstreetmap-carto/zip/master
+unzip openstreetmap-carto-master.zip
+
+#修改权限
+sudo chown postgres:postgres /data/osmdata
+
+#切换用户
+su postgres
+
+#不带样式文件
+osm2pgsql -s -U postgres -H 127.0.0.1 -P 5432 -W -d gisdb /data/osmdata/taiwan-latest.osm.pbf
+
+//带样式文件
+osm2pgsql -s -U postgres -H 127.0.0.1 -P 5432 -W -d gisdb /data/osmdata/taiwan-latest.osm.pbf --style /data/osmdata/openstreetmap-carto-master/openstreetmap-carto.style
+```
+
 注：osm2pgsql导入数据有两种模式， normal and slim mode。
 normal mode会在内存中产生如下三张中间表，并在导入结束后丢弃，因此速度较快。
 

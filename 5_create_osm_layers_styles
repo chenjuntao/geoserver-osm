@@ -1,0 +1,192 @@
+1. 创建图层数据表
+
+到目前为止，chinaosmgisdb中包含了planet_osm_line,planet_osm_point,planet_osm_polygon和planet_osm_roads四个数据表，我们要为各个图层分别配置样式，就应该为这些数据归归类，方法有两种，一是使用这四个基础数据表中再创建新的数据表，二是以这四个表为基础，创建视图(View)，效果都一样，不过视图在应用时会慢点，所以推荐采用第一种方式。
+
+```
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ gisdb     | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ testdb    | testuser | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/testuser         +
+           |          |          |             |             | testuser=CTc/testuser
+(5 rows)
+
+postgres=# \c gisdb 
+You are now connected to database "gisdb" as user "postgres".
+gisdb=# \d
+ public   | cities             | table    | postgres
+ public   | geography_columns  | view     | postgres
+ public   | geometry_columns   | view     | postgres
+ public   | planet_osm_line    | table    | postgres
+ public   | planet_osm_nodes   | table    | postgres
+ public   | planet_osm_point   | table    | postgres
+ public   | planet_osm_polygon | table    | postgres
+ public   | planet_osm_rels    | table    | postgres
+ public   | planet_osm_roads   | table    | postgres
+ public   | planet_osm_ways    | table    | postgres
+ public   | raster_columns     | view     | postgres
+ public   | raster_overviews   | view     | postgres
+ public   | spatial_ref_sys    | table    | postgres
+ topology | layer              | table    | postgres
+ topology | topology           | table    | postgres
+ topology | topology_id_seq    | sequence | postgres
+```
+
+先下载本文中将用到的各种脚本和批处理文件[osmsld.zip](http://files.cnblogs.com/files/think8848/osmsld.zip)，然后放到合适的位置解压
+
+```
+wget -O osmsld.zip http://files.cnblogs.com/files/think8848/osmsld.zip
+unzip osmsld.zip
+
+#移动到postgres用户目录下，并修改权限
+sudo mv osmsld /data/osmdata/
+sudo chown -R postgres:postgres osmsld
+```
+
+现在就可以正式创建图层表了，登录postgres用户，然后使用gisdb的owner(**你想要在GeoServer中使用的那个用户运行SQL脚本文件**)，不要使用无关用户，不然后面你得一个个得去修改权限。
+
+```
+cd /data/osmdata/
+su postgres
+#下面二者任选一即可
+psql -d gisdb -a -f ./osmsld/create_tables.sql
+psql -d gisdb -a -f ./osmsld/create_views.sql
+```
+
+生成视图很快，生成数据表稍慢（与数据量大小有关），我们来看一下数据库结构，生成了新的数据表/视图。
+```
+gisdb=# \dv
+                List of relations
+ Schema |         Name          | Type |  Owner   
+--------+-----------------------+------+----------
+ public | aero-poly             | view | postgres
+ public | agriculture           | view | postgres
+ public | amenity-areas         | view | postgres
+ public | beach                 | view | postgres
+ public | building              | view | postgres
+ public | forest                | view | postgres
+ public | geography_columns     | view | postgres
+ public | geometry_columns      | view | postgres
+ public | grass                 | view | postgres
+ public | highway-label         | view | postgres
+ public | park                  | view | postgres
+ public | parking-area          | view | postgres
+ public | placenames-medium     | view | postgres
+ public | raster_columns        | view | postgres
+ public | raster_overviews      | view | postgres
+ public | route-bridge-0        | view | postgres
+ public | route-bridge-1        | view | postgres
+ public | route-bridge-2        | view | postgres
+ public | route-bridge-3        | view | postgres
+ public | route-bridge-4        | view | postgres
+ public | route-bridge-5        | view | postgres
+ public | route-fill            | view | postgres
+ public | route-line            | view | postgres
+ public | route-tunnels         | view | postgres
+ public | route-turning-circles | view | postgres
+ public | water                 | view | postgres
+ public | water-outline         | view | postgres
+ public | wetland               | view | postgres
+(28 rows)
+```
+
+# 2. 在GeoServer中创建工作空间和数据源
+
+此处较简单，在geoserver中登陆图形界面，然后分别执行下面两步操作即可。
+
+- 创建工作空间**gis**，略...
+
+- 创建数据源**china_osm**，略...
+
+# 3. 创建样式和图表
+
+可以手动创建，也可以使用批处理文件自动创建，样式和图表加起来近50个，手动创建非常麻烦，可以通过脚本自动创建。
+
+回到之前我们下载的osmsld.zip文件夹，然后稍修改下SLD_create.sh文件，主要是修改GeoServer的REST API相关参数，如下：
+```
+restapi=http://localhost:8080/geoserver/rest
+login=admin:geoserver
+workspace=gis
+store=china_osm
+```
+通常而言，既然是REST服务了，应该远程和本地调用都没有问题，然而在本例中，**经实测，发现localhost可以，如果在另一台linux上远程调用REST服务，会出现错误，导致不能创建图层**，原因以后在查吧，先使用本地调用。
+
+在本文件的最下面，也修改点内容，将两行改为如下：
+```
+#curl -v -u admin:@pp\$4boundleSS -XPOST -d@layergroup.xml -H "Content-type: text/xml" \
+#  http://apps.opengeo.org/geoserver/rest/workspaces/osm/layergroups
+```
+然后进入刚才解压sld.zip形成的sld目录 cd sld ，然后调用以下命令
+
+```
+sudo sh /tmp/osmsld/SLD_create.sh
+```
+
+如果整个过程顺利应该就可以在GeoServer的图层和样式里面能看到结果了
+
+- 图层：新建了23个图层；
+
+- 样式：新建了29个样式。
+
+如果你的没有成功，很有可能只能看见样式，而看不见图层，那最好找找原因，得新来一遍，osmsld.zip包中有一个SLD_delete.sh文件可以自动帮你清理刚才的工作，**不过貌似它清理过头了，把工作空间和数据源也给清掉了**，因为我都在测试环境下在用，所以会看到在清理后工作空间和数据源里面空空如也，所以**SLD_delete.sh批处理文件慎用**，不要将你其他有用的东西删掉了！！！在使用SLD_delete.sh之前，照例也要先修改下其配置。
+
+# 4. 创建图层组
+
+执行到上一步，应该是可以看到图层样式了，但是那只能显示整个地图的一个层，我们还需要建个完整的图层组，用来展示完整地图。
+
+先做个准备工作，打开osmsld.zip包中的layergroup.xml文件，将ocean这一节给删掉，由于时间有限，本次先不导ocean数据，另找时间专门讲解导ocean数据的方法。
+
+随后打开SLD_create.sh，滚动到最底部看一眼，我们要照着这两行命令创建图层组：
+```
+curl -v -u admin:geoserver -XPOST -d@layergroup.xml -H "Content-type: text/xml" \
+  http://localhost:8080/geoserver/rest/workspaces/gis/layergroups
+```
+查看建好的图层组，我们会发现新建了一个名为osm的图层组。
+
+最后，如果想使用命令删除掉这个图层使用下列命令即可
+
+```
+curl -v -u admin:geoserver -XDELETE http://localhost:8080/geoserver/rest/workspaces/gis/layergroups/osm
+```
+
+# 5. 添加地名中文字体
+
+进行完上一步操作后，在Layer Preview中就可以预览地图了，但是地名的显示字体不一定是我们想要的，所以接下来我们看看如果添加相要的字体，如微软雅黑，设置字体部分参考了[这里](http://www.cnblogs.com/rwxwsblog/p/5281792.html)。
+
+首先，给GeoServer所在的CentOS7安装微软雅黑，从Windows操作系统的C:\Windows\Fonts中复制微软雅黑，放到一个指定文件夹中，就会得到一两个文件：msyh.ttf、msyhbd.ttf，将这两个字体打包到一个zip文件夹中，然后想办法上传到CentOS服务器中。怎么弄自已想办法（我为了方便，在Windows上弄了个web服务器，这样不论怎么折腾虚拟机，服务器上的东西都可以使用）
+
+安装字体管理工具
+
+```
+sudo yum install  fontconfig mkfontscale -y
+```
+
+ 创建字体目录，并且将msyh.ttf和msyhbd.ttf复制到字体目录中
+
+```
+sudo mkdir -p /usr/share/fonts/win
+sudo mv msyh.ttf msyhbd.ttf /usr/share/fonts/win
+```
+
+建立字体索引信息，更新字体缓存
+
+```
+cd /usr/share/fonts/win
+sudo mkfontscale
+sudo mkfontdir
+fc-cache
+```
+
+然后重启系统， reboot ，重启好后先查看服务器状态，到geoserver的页面“服务器状态—>可用字体—>查看全部可用字体列布”就可以看到新增的字体了。
+
+打开GeoServer的Styles菜单，查找到**highway-label**样式，并打开编辑，将其中的样式内容复制到notepad中，然后全使用Ctrl + H将所有“DejaVu Sans”替换成"微软雅黑"，再将notepad中的样式复制到样式编辑器中，然后点击Validate验证，如果没有错误就可以保存了。
+
+另外一个需要修改字体的style文件为：**placenames-medium**；
+
+最后，我们在Layer Preview中使用OpenLayers预览一下地图吧。

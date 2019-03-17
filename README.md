@@ -14,5 +14,6 @@ publish a wms service with geoserver, map data format is osm(open street map)
 ## 2. others
 - **coordinate_transform**:coordinate system transform with gdal library;
 - **postgresql_features**:adventages and features about postgresql, why are we should use postgresql;
+- *shortest_path_algorithm*:some algorithms about shortest path planning;
 
 

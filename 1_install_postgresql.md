@@ -148,11 +148,12 @@ psql -U testuser -h 127.0.0.1 -p 5432 -d testdb -W
 ## 16. 其他数据库命令
 
 最后，再说几个psql很常用的命令，
+```
 \c,切换数据库，如: \c postgres; 它的作用和mysql的use postgres一样；
 \d，此命令是列出当前库下所有的表。
 \du，列出当前数据库下的所有用户。
 \dt，列出当前数据库下的所有数据表。
 \?，帮助
-
+```
 ## 17. GUI管理工具pgAdmin4
 下载地址在[这里](https://www.pgadmin.org/download/windows4.php) 

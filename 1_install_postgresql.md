@@ -137,7 +137,7 @@ CREATE USER testuser CREATEDB LOGIN PASSWORD '123'
 GRANT ALL ON DATABASE testdb TO testuser
 ```
 
-## 14. 退出postgres用户登录，命令为**\q**, 对，你没看错，就是一个反斜杠和一个q
+## 14. 退出postgres用户登录，命令为\q, 对，你没看错，就是一个反斜杠和一个q
 
 ## 15. 尝试用testuser登录数据库
 

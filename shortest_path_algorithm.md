@@ -84,7 +84,9 @@ A*算法的核心是设计估价函数，设计估价函数h(j)有很多方法�
 2、寻路时间比较长。
 
 广度优先搜索，这个用形象的比喻，就像是地震波，从起点向外辐射，直到找到目标点。我们在实现的时候，一般采用队列来实现。
+
 ![img](http://mmbiz.qpic.cn/mmbiz/YWnUbMibWJE1mEKHokribwic6wTBc4lzJ0XxiayKJQicsKYVrXsicuTwJOxPsJqOzX8hg9TMDO0tHGnPm1OLViabIEzcA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 这个算法的优点：
 
 1、简单。代码也就几十行；

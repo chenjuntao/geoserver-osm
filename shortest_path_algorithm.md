@@ -96,8 +96,17 @@ A*算法的核心是设计估价函数，设计估价函数h(j)有很多方法�
 
 1、算法消耗的时间比较大，遍历的点会很多。
 
-这里就引出一个问题：为什么广度优先算法能找到最优路径，但是却很耗时呢？
+## Dijkstra 算法与A*算法的比较
 
+Dijkstra 算法（没有使用启发式信息）
+
+{ 绿色：起点       红色：终点       黑色：障碍物       白色：路径       黄色：已处理的节点 }
+
+![img](https://img-blog.csdn.net/20161228204431629?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcm9iaW52aXN0YQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+A* 算法（使用了启发式信息：到目标的距离）
+
+![img](https://img-blog.csdn.net/20161228204449060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcm9iaW52aXN0YQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 ## 2.3 DStar算法
 

@@ -67,6 +67,37 @@ A*算法的核心是设计估价函数，设计估价函数h(j)有很多方法�
 
 算法比较：https://blog.csdn.net/qq_34446253/article/details/51427423
 
+## 广度优先（BFS）和深度优先（DFS）搜索
+
+在谈A*之前，还是要先聊聊搜索算法中的老祖宗，深度和广度优先搜索算法。这两个算法，基本上各教科书都会有讲解。不过为了讲清楚A*，我们还是先一起来看看他们吧。
+
+深度优先搜索，用俗话说就是不见棺材不回头。算法会朝一个方向进发，直到遇到边界或者障碍物，才回溯。一般在实现的时候，我们采用递归的方式来进行，也可以采用模拟压栈的方式来实现。
+
+如下图，S代表起点，E代表终点。我们如果按照右、下、左、上这样的扩展顺序的话，算法就会一直往右扩张，直到走到地图的右边界，发现没找到目标点，然后再回溯。
+
+![img](http://mmbiz.qpic.cn/mmbiz/YWnUbMibWJE1mEKHokribwic6wTBc4lzJ0XmdIBFAavylJGWMhaPf0hrZIbQzVIa9UkfZCjiaecED53x0Z6Eicq1zjw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
+这个算法的好处就是实现简单，可能就十几行代码。不过问题也很明显，就是：
+
+1、路径可能不是最优解;
+
+2、寻路时间比较长。
+
+广度优先搜索，这个用形象的比喻，就像是地震波，从起点向外辐射，直到找到目标点。我们在实现的时候，一般采用队列来实现。
+![img](http://mmbiz.qpic.cn/mmbiz/YWnUbMibWJE1mEKHokribwic6wTBc4lzJ0XxiayKJQicsKYVrXsicuTwJOxPsJqOzX8hg9TMDO0tHGnPm1OLViabIEzcA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+这个算法的优点：
+
+1、简单。代码也就几十行；
+
+2、路径能找到最优解；
+
+不足：
+
+1、算法消耗的时间比较大，遍历的点会很多。
+
+这里就引出一个问题：为什么广度优先算法能找到最优路径，但是却很耗时呢？
+
+
 ## 2.3 DStar算法
 
 D*是动态A*（D-Star, Dynamic A*） 卡耐基梅隆机器人中心的Stentz在1994和1995年的两篇文章提出，主要用于机器人探路。美国火星探测器上采用的就是此寻路算法。

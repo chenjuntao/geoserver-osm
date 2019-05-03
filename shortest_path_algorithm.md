@@ -69,6 +69,12 @@ Amit斯坦福大学一个博士的游戏网站：http://theory.stanford.edu/~ami
 
 算法比较：https://blog.csdn.net/qq_34446253/article/details/51427423
 
+几个在线demo：
+- https://anvaka.github.io/ngraph.path.demo/#?graph=amsterdam-roads
+- http://qiao.github.io/PathFinding.js/visual/
+- https://briangrinstead.com/files/astar/
+- http://www.hightopo.com/demo/astar/astar.html
+
 ## 广度优先（BFS）和深度优先（DFS）搜索
 
 在谈A*之前，还是要先聊聊搜索算法中的老祖宗，深度和广度优先搜索算法。这两个算法，基本上各教科书都会有讲解。

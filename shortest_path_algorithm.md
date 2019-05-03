@@ -65,7 +65,7 @@ A*算法的核心是设计估价函数，设计估价函数h(j)有很多方法�
 
 算法原理详见：https://blog.csdn.net/tiandijun/article/details/62226163
 
-http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html#dijkstras-algorithm-and-best-first-search
+Amit斯坦福大学一个博士的游戏网站：http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html#dijkstras-algorithm-and-best-first-search
 
 算法比较：https://blog.csdn.net/qq_34446253/article/details/51427423
 
